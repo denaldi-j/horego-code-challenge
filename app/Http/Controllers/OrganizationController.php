@@ -11,7 +11,7 @@ class OrganizationController extends Controller
     public function index()
     {
         if (auth()->user()->role === 'account_manager') {
-            $this->show(auth()->user()->organization_id);
+            return $this->show(auth()->user()->organization_id);
         }
 
         $organizations = Organization::all();

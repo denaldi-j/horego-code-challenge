@@ -75,4 +75,16 @@ class PersonController extends Controller
         $message = ['success' => 'Data telah dihapus'];
         return redirect()->route('person.index')->with($message);
     }
+
+    public function search(Request $request)
+    {
+        $query = Person::query();
+        $query->where('name', 'like', "%{$request->keyword}%");
+        $query->orWhereHas('organization', function ($organization) use($request) {
+            $organization->where('name', 'like', "%{$request->keyword}%");
+        });
+
+        $persons = $query->get();
+        return view('person.index', compact('persons'));
+    }
 }

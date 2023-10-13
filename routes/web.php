@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('store', [PersonController::class, 'store'])->name('person.store');
         Route::post('update/{id}', [PersonController::class, 'update'])->name('person.update');
         Route::get('destroy/{id}', [PersonController::class, 'destroy'])->name('person.destroy');
+        Route::post('search', [PersonController::class, 'search'])->name('person.search');
     });
 
     Route::group(['prefix' => 'user'], function () {
